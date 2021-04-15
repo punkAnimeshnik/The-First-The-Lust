@@ -1,10 +1,12 @@
 @import '~normalize.css';
 @import 'HelveticaRegular';
 @import 'HelveticaThin';
+@import 'HelveticaNevueCry';
 
 @fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
+@Halvetica: "HelveticaNevueCry";
 
 * {
     margin: 0;
@@ -13,16 +15,90 @@
     text-decoration: none;
     box-sizing: border-box;
     border-collapse: collapse;
-    text-align: center;
 
 }
 
-h1{
-  font-family: HelveticaThin;
-  color: blue;
-}
-h2{
-  font-family: HelveticaRegular;
-  color: red;
-}
+header{
+  height: 80px;
+  width: 100%;
+  background-color: #F2EEEE;
+  .container{
+    .row{
+      padding: 16px 0;
+      justify-content: space-evenly;
+      align-items: center;
+      .logo{
+        display: flex;
+        justify-content: flex-start;
+      }
+      .header_flexEnd{
+        display: flex;
+        justify-content: flex-end;
+        select{
+          margin: 0 35px;
+          border: none;
+          background-color: #F2EEEE;
+          font-size: 14pt;
+          font-family: @Halvetica;
+          font-weight: bold;
+         }
+        .log{
+          margin-left: 35px;
+          width: 250px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          a{
+            text-decoration: none;
+            color: black;
+            font-family: @Halvetica;
+            font-weight: bold;
+            font-size: 14pt;
+          }
+          button{
+            border: none;
+            border-radius: 6px;
+            background-color: #FF634A;
+            color: white;
+            padding: 16px 50px;
+          }
+        }
+      }
+    }
+  }
 
+}
+main{
+padding: 64px 0;
+  .title{
+    h1{
+      font-family: @Halvetica;
+      margin: 0;
+      font-weight: bold;
+      font-size: 32pt;
+    }
+  }
+  .selectors{
+    padding: 24px 0;
+    display: flex;
+    justify-content: space-between;
+    select{
+      border: none;
+      font-family: @Halvetica;
+      font-weight: bold;
+      color: black;
+      font-size: 14pt;
+      option{
+        border: none;
+
+        color: black;
+      }
+    }
+    .params{
+      margin-left: -20px;
+      select{
+        margin: 0 20px;
+      }
+    }
+  }
+}
