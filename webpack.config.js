@@ -41,6 +41,7 @@ module.exports = {
         optimization(),
     devServer: {
         port: 4200,
+        hot: isDev,
         open: true
     },
     plugins: [
@@ -63,10 +64,6 @@ module.exports = {
     },
     module: {
         rules: [
-            {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader,'css-loader']
-            },
              {
                 test: /\.less$/,
                 use: [MiniCssExtractPlugin.loader,'css-loader','less-loader']

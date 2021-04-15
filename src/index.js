@@ -1,5 +1,6 @@
-//import './css/main.css'
+import '@fortawesome/fontawesome-free/js/all'
 import './less/main.less'
+import 'bootstrap'
 import './babel'
 import Vue from 'vue'
 
