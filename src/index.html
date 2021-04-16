@@ -66,6 +66,26 @@
                             </select>
                         </div>
                     </div>
+                    <div class="peoples" >
+                        <div v-for="people in peoples" class="people" v-bind:class="people.name">
+                            <div class="background">
+                                <img v-bind:src="people.img" alt="">
+                            </div>
+                            <div class="information">
+                                <div class="age">
+                                    <h3>{{people.age}}</h3>
+                                </div>
+                                <div class="name">
+                                    <h1>{{people.name}}</h1>
+                                </div>
+                                <div class="params">
+                                    <p>Eye color: {{people.eye}}</p>
+                                    <p>Height: {{people.height}}</p>
+                                    <p>Mass: {{people.mass}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -73,7 +93,23 @@
     </main>
     
     <footer>
-        
+        <div class="container">
+            <div class="row">
+                <div class="topLine" >
+                    <div class="logo">
+                        <img src="../src/img/icons/Star%20Wars.svg" alt="">
+                   </div>
+                    <div class="socNetworks">
+                        <div class="icon"> <a href="facebook.com"><i class="fab fa-facebook-f"></i></a></div>
+                        <div class="icon"><a href="www.instagram.com"><i class="fab fa-instagram"></i></a></div>
+                    </div>
+                </div>
+                <div class="bottonLine">
+                    <p>All rights Reserved.</p>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
     </footer>
     
 
