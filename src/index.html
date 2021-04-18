@@ -42,28 +42,107 @@
                 <div id="app">
                     <div class="selectors">
                         <div class="params">
-                            <select  id="eye" >
-                                <option>Eye color</option>
-                                <option value="blue">blue</option>
-                                <option value="blue-gray">blue-gray</option>
-                                <option value="brown">brown</option>
-                                <option value="red">red</option>
-                                <option value="yellow">yellow</option>
-                            </select>
-                            <select name="" id="heigt">
-                                <option>Heigt</option>
-                            </select>
-                            <select name="" id="age">
-                                <option>Age</option>
-                            </select>
+                            <div class="selector eye">
+                                <div v-on:click="switchActive('eye')" class="selector_header">
+                                    <p>Eye color <i class="fas fa-chevron-down"></i></p>
+                                </div>
+                                <div v-if="eye.active" class="triange"></div>
+                                <div v-if="eye.active"  class="selector_body">
+                                    <div class="selector_item">
+                                        <p class="blue">blue</p>
+                                    </div>
+                                    <div class="selector_item">
+                                        <p class="blue-gray">blue-gray</p>
+                                    </div>
+                                    <div class="selector_item">
+                                        <p class="brown">brown</p>
+                                    </div>
+                                    <div class="selector_item">
+                                        <p class="red">red</p>
+                                    </div>
+                                    <div class="selector_item">
+                                        <p class="yellow">yellow</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="selector heigt">
+                                <div v-on:click="switchActive('heigt')" class="selector_header">
+                                    <p>Heigt<i class="fas fa-chevron-down"></i></p>
+                                </div>
+                                <div v-if="heigt.active" class="triange"></div>
+                                <div  v-if="heigt.active" class="selector_body">
+                                    <div   class="selector_inputs">
+                                        <input v-on:input="setLeftValue(),setRightValue()" type="text" v-model.number="heigt.min">
+                                        <input v-on:input="setLeftValue(),setRightValue()" type="text" v-model.number="heigt.max">
+                                    </div>
+                                    <div class="selector_range">
+                                        <div class="min_max">
+                                            <p>96cm</p>
+                                            <p>202cm</p>
+                                        </div>
+                                        <div class="multi-range-slider">
+                                            <input v-on:input="setLeftValue(heigt)" type="range" id="input-left" min="96" max="202" v-model.number="heigt.min">
+                                            <input v-on:input="setRightValue(heigt)" type="range" id="input-right" min="96" max="202" v-model.number="heigt.max">
+
+                                            <div class="slider">
+                                                <div class="track"></div>
+                                                <div class="range"></div>
+                                                <div class="thumb left"></div>
+                                                <div class="thumb right"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="selector age">
+                                <div v-on:click="switchActive('age')" class="selector_header">
+                                    <p>Age <i class="fas fa-chevron-down"></i></p>
+                                </div>
+                                <div v-if="age.active" class="triange"></div>
+                                <div v-if="age.active" class="selector_body">
+                                    <div class="selector_inputs">
+                                        <input v-on:input="setLeftValue(),setRightValue()" type="text" v-model.number="age.min">
+                                        <input v-on:input="setLeftValue(),setRightValue()" type="text" v-model.number="age.max">
+                                    </div>
+                                    <div class="selector_range">
+                                        <div class="min_max">
+                                            <p>12 BBY</p>
+                                            <p>112 BBY</p>
+                                        </div>
+                                        <div class="multi-range-slider">
+                                            <input v-on:input="setLeftValue(heigt)" type="range" id="input-age-left" min="12" max="112" v-model.number="age.min">
+                                            <input v-on:input="setRightValue(heigt)" type="range" id="input-age-right" min="12" max="112" v-model.number="age.max">
+
+                                            <div class="slider">
+                                                <div class="track"></div>
+                                                <div class="range"></div>
+                                                <div class="thumb left"></div>
+                                                <div class="thumb right"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="sortBy">
-                            <select name="" id="sortBy">
-                                <option>Sort by</option>
-                                <option value="byAge">age</option>
-                                <option value="byMass">mass</option>
-                                <option value="byHeight">height</option>
-                            </select>
+                            <div class="selector sort">
+                                <div v-on:click="switchActive('sort')" class="selector_header">
+                                    <p>Sort by <i class="fas fa-chevron-down"></i></p>
+                                </div>
+                                <div v-if="sort.active" class="triange"></div>
+                                <div v-if="sort.active"  class="selector_body">
+                                    <div class="selector_item">
+                                        <p class="blue">age</p>
+                                    </div>
+                                    <div class="selector_item">
+                                        <p class="blue-gray">mass</p>
+                                    </div>
+                                    <div class="selector_item">
+                                        <p class="brown">heigt</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="peoples" >
@@ -73,13 +152,13 @@
                             </div>
                             <div class="information">
                                 <div class="age">
-                                    <h3>{{people.age}}</h3>
+                                    <h3>{{people.birth_year}}</h3>
                                 </div>
                                 <div class="name">
                                     <h1>{{people.name}}</h1>
                                 </div>
                                 <div class="params">
-                                    <p>Eye color: {{people.eye}}</p>
+                                    <p>Eye color: {{people.eye_color}}</p>
                                     <p>Height: {{people.height}}</p>
                                     <p>Mass: {{people.mass}}</p>
                                 </div>
