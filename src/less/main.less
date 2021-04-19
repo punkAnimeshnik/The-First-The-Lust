@@ -34,6 +34,11 @@ header{
       .header_flexEnd{
         display: flex;
         justify-content: flex-end;
+        @media (max-width: 768px) {
+        select{
+        display: none;
+          }
+        }
         select{
           margin: 0 35px;
           border: none;
@@ -55,6 +60,15 @@ header{
             font-weight: bold;
             font-size: 14pt;
           }
+          svg{
+            display: none;
+          }
+          @media (max-width: 425px) {
+                svg{
+                  display: block;
+                  font-size: 24pt;
+                }
+          }
           button{
             border: none;
             border-radius: 6px;
@@ -63,22 +77,87 @@ header{
             padding: 16px 50px;
           }
         }
+
       }
     }
   }
 
 }
+@media (max-width: 425px) {
+  header{
+    background: none;
+    .log{
+      justify-content: space-between;
+      a{
+        font-size: 14pt;
+      }
+      svg{
+        color: black;
+        display: block;
+        font-size: 24pt;
+      }
+      button{
+        display: none;
+      }
+    }
+  }
+
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: .3s;
+  opacity: 1;
+}
+.fade-enter, .fade-leave-to {
+  transition: .3s;
+  opacity: 0;
+}
+.load-enter-active, .load-leave-active {
+  transition: .3s;
+  opacity: 1;
+}
+.load-enter, .load-leave-to {
+  transition: .2s;
+  opacity: 0;
+}
+
 main{
+  .loader{
+    position: absolute;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1333b0;
+    svg{
+      font-size: 144pt;
+      color: #fff;
+    }
+
+  }
 padding: 64px 0;
   .container{
     padding: 0;
   }
   .title{
     h1{
+      position: relative;
       font-family: @Halvetica;
       margin: 0;
       font-weight: bold;
       font-size: 32pt;
+    }
+    @media (max-width: 425px) {
+      h1{
+        left: 18px;
+        font-size: 28pt;
+      }
     }
   }
   .selectors{
@@ -99,6 +178,12 @@ padding: 64px 0;
           font-size: 14px;
         }
       }
+      &_header:hover{
+
+        cursor: pointer;
+        color: rgba(0, 0, 0, 0.8);
+
+      }
       .triange{
         position: relative;
         z-index: 2;
@@ -112,7 +197,9 @@ padding: 64px 0;
         border-left: 10px solid transparent;
         border-bottom: 20px solid white;
       }
+
       &_body{
+        margin: 0;
         background: white;
         z-index: 1;
         position: absolute;
@@ -133,6 +220,10 @@ padding: 64px 0;
             color: black;
             font-weight: bold;
           }
+        }
+        .selector_item:hover{
+          cursor: pointer;
+         font-weight: bold;
         }
         .selector_range{
           margin-top: 10px;
@@ -202,7 +293,7 @@ padding: 64px 0;
               z-index: 2;
               height: 5px;
               width: 100%;
-              opacity: 0;
+             opacity: 0;
             }
             input[type=range]::-webkit-slider-thumb {
               pointer-events: all;
@@ -218,17 +309,50 @@ padding: 64px 0;
         }
       }
     }
+    @media (max-width: 425px) {
+      .selector{
+        margin: 0 12px;
+
+      }
+    }
     .heigt{
       .selector_body{
-        left: 285px;
+        left: 15em;
       }
     }
     .age{
       .selector_body{
-        left: 405px;
+        left: 22em;
+      }
+    }
+    @media (max-width: 1024px) {
+      .heigt{
+        .selector_body{
+          left: 5em;
+        }
+      }
+      .age{
+        .selector_body{
+          left: 10em;
+        }
       }
     }
     .sort{
+      .fa-sort-amount-down{
+        position: relative;
+        display: none;
+      }
+      @media (max-width: 425px) {
+        .fa-sort-amount-down{
+          right: 18px;
+          font-size: 18pt;
+          display: block;
+        }
+        p{
+          display: none;
+        }
+
+      }
       .selector_body{
         padding-right: 50px;
       }
@@ -241,10 +365,23 @@ padding: 64px 0;
 
     }
   }
+  @media (max-width: 425px) {
+    .selectors{
+      padding: 0;
+      .sortBy{
+        .sort{
+          .selector_body{
+            z-index: 2;
+          }
+        }
+      }
+
+    }
+  }
   .peoples{
     margin: 24px 0;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     flex-wrap: wrap;
     .people{
       width: 48%;
@@ -256,8 +393,24 @@ padding: 64px 0;
         width: 40em;
         height: 25em;
         img{
+          position: relative;
           width: auto;
           height: inherit;
+        }
+        @media (max-width: 1024px) {
+          img{
+            right: 100px;
+          }
+        }
+        @media (max-width: 768px) {
+          img{
+            right: 0;
+          }
+        }
+        @media (max-width: 425px) {
+          img{
+            right: 200px;
+          }
         }
       }
       .information{
@@ -294,7 +447,7 @@ padding: 64px 0;
           height: 25px;
           display: flex;
           p{
-            opacity: 90%;
+
             font-family: @Halvetica;
             margin: 0 12px;
             font-size: 14pt;
@@ -302,6 +455,61 @@ padding: 64px 0;
 
         }
       }
+      @media (max-width: 425px) {
+        .information{
+          background: -moz-linear-gradient(top,  rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
+          background: -webkit-linear-gradient(top,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.7) 100%);
+          background: linear-gradient(to bottom,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.7) 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3000000', endColorstr='#1a000000',GradientType=0 );
+
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          padding: 25px 5px;
+          .age{
+            padding: 0;
+            h3{
+              margin: 0;
+              padding-bottom: 16px;
+            }
+          }
+          .name{
+            margin: 0;
+            h1{
+              position: relative;
+              margin: 0;
+              font-size: 24pt;
+            }
+          }
+          .params{
+            padding-top: 8px;
+            margin: 0;
+            p{
+              font-size: 12pt;
+              margin: 0 8px;
+              font-weight: 100;
+            }
+          }
+
+        }
+      }
+    }
+    @media (max-width: 768px) {
+      .people{
+        justify-content: center;
+        width: auto;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .peoples{
+      justify-content: center;
+    }
+  }
+  @media (max-width: 425px) {
+    .peoples{
+      margin: 0;
+
     }
   }
 }

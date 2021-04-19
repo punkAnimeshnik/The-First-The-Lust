@@ -12,12 +12,12 @@
     <header>
         <div class="container">
             <div class="row">
-                <div class="col-xl-6">
+                <div class="col-md-6 col">
                     <div class="logo">
                         <img src="../src/img/icons/Star%20Wars.svg" alt="">
                     </div>
                 </div>
-                <div class="col-xl-6">
+                <div class="col-md-6 col-6">
                     <div class="header_flexEnd">
                         <select name="" id="laung">
                             <option value="EN">En</option>
@@ -25,6 +25,7 @@
                         </select>
                         <div class="log">
                             <a href="#">Log in</a>
+                            <i class="fas fa-grip-lines"></i>
                             <button>Sig up</button>
                         </div>
                     </div>
@@ -40,88 +41,101 @@
                     <h1>People</h1>
                 </div>
                 <div id="app">
+                    <transition name="load">
+                        <div v-if="loader" class="loader">
+                            <i class="fab fa-jedi-order"></i>
+                        </div>
+                    </transition>
                     <div class="selectors">
                         <div class="params">
                             <div class="selector eye">
                                 <div v-on:click="switchActive('eye')" class="selector_header">
                                     <p>Eye color <i class="fas fa-chevron-down"></i></p>
                                 </div>
+
                                 <div v-if="eye.active" class="triange"></div>
-                                <div v-if="eye.active"  class="selector_body">
-                                    <div class="selector_item">
-                                        <p class="blue">blue</p>
+                                <transition name="fade">
+                                    <div v-if="eye.active" v-on:click="filtEye($event.path[0]), switchActive('eye')" name="fade" class="selector_body">
+                                        <div class="selector_item">
+                                            <p class="blue">blue</p>
+                                        </div>
+                                        <div class="selector_item">
+                                            <p class="blue-gray">blue-gray</p>
+                                        </div>
+                                        <div class="selector_item">
+                                            <p class="brown">brown</p>
+                                        </div>
+                                        <div class="selector_item">
+                                            <p class="red">red</p>
+                                        </div>
+                                        <div class="selector_item">
+                                            <p class="yellow">yellow</p>
+                                        </div>
                                     </div>
-                                    <div class="selector_item">
-                                        <p class="blue-gray">blue-gray</p>
-                                    </div>
-                                    <div class="selector_item">
-                                        <p class="brown">brown</p>
-                                    </div>
-                                    <div class="selector_item">
-                                        <p class="red">red</p>
-                                    </div>
-                                    <div class="selector_item">
-                                        <p class="yellow">yellow</p>
-                                    </div>
-                                </div>
+                                </transition>
+
                             </div>
                             <div class="selector heigt">
-                                <div v-on:click="switchActive('heigt')" class="selector_header">
-                                    <p>Heigt<i class="fas fa-chevron-down"></i></p>
-                                </div>
-                                <div v-if="heigt.active" class="triange"></div>
-                                <div  v-if="heigt.active" class="selector_body">
-                                    <div   class="selector_inputs">
-                                        <input v-on:input="setLeftValue(),setRightValue()" type="text" v-model.number="heigt.min">
-                                        <input v-on:input="setLeftValue(),setRightValue()" type="text" v-model.number="heigt.max">
-                                    </div>
-                                    <div class="selector_range">
-                                        <div class="min_max">
-                                            <p>96cm</p>
-                                            <p>202cm</p>
+                                <div v-on:click="switchActive('heigt'), filtHeigt()" class="selector_header">
+                                <p>Heigt<i class="fas fa-chevron-down"></i></p>
+                            </div>
+                            <div v-if="heigt.active" class="triange"></div>
+                                <transition name="fade">
+                                    <div  v-if="heigt.active" class="selector_body">
+                                        <div   class="selector_inputs">
+                                            <input v-on:input="setLeftValue('heigt'),setRightValue('heigt')" type="text" v-model.number="heigt.min">
+                                            <input v-on:input="setLeftValue('heigt'),setRightValue('heigt')" type="text" v-model.number="heigt.max">
                                         </div>
-                                        <div class="multi-range-slider">
-                                            <input v-on:input="setLeftValue(heigt)" type="range" id="input-left" min="96" max="202" v-model.number="heigt.min">
-                                            <input v-on:input="setRightValue(heigt)" type="range" id="input-right" min="96" max="202" v-model.number="heigt.max">
+                                        <div class="selector_range">
+                                            <div class="min_max">
+                                                <p>96cm</p>
+                                                <p>202cm</p>
+                                            </div>
+                                            <div class="multi-range-slider">
+                                                <input v-on:input="setLeftValue('heigt'), filtHeigt" type="range" id="heigt-input-left" min="96" max="202" v-model.number="heigt.min">
+                                                <input v-on:input="setRightValue('heigt'), filtHeigt" type="range" id="heigt-input-right" min="96" max="202" v-model.number="heigt.max">
 
-                                            <div class="slider">
-                                                <div class="track"></div>
-                                                <div class="range"></div>
-                                                <div class="thumb left"></div>
-                                                <div class="thumb right"></div>
+                                                <div class="slider heigt">
+                                                    <div class="track"></div>
+                                                    <div class="range"></div>
+                                                    <div class="thumb left"></div>
+                                                    <div class="thumb right"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </transition>
                             </div>
                             <div class="selector age">
-                                <div v-on:click="switchActive('age')" class="selector_header">
+                                <div v-on:click="switchActive('age'),filtAge()" class="selector_header">
                                     <p>Age <i class="fas fa-chevron-down"></i></p>
                                 </div>
                                 <div v-if="age.active" class="triange"></div>
-                                <div v-if="age.active" class="selector_body">
-                                    <div class="selector_inputs">
-                                        <input v-on:input="setLeftValue(),setRightValue()" type="text" v-model.number="age.min">
-                                        <input v-on:input="setLeftValue(),setRightValue()" type="text" v-model.number="age.max">
-                                    </div>
-                                    <div class="selector_range">
-                                        <div class="min_max">
-                                            <p>12 BBY</p>
-                                            <p>112 BBY</p>
+                                <transition name="fade">
+                                    <div v-if="age.active" class="selector_body">
+                                        <div class="selector_inputs">
+                                            <input v-on:input="setLeftValue('age'),setRightValue('age')" type="text" v-model.number="age.min">
+                                            <input v-on:input="setLeftValue('age'),setRightValue('age')" type="text" v-model.number="age.max">
                                         </div>
-                                        <div class="multi-range-slider">
-                                            <input v-on:input="setLeftValue(heigt)" type="range" id="input-age-left" min="12" max="112" v-model.number="age.min">
-                                            <input v-on:input="setRightValue(heigt)" type="range" id="input-age-right" min="12" max="112" v-model.number="age.max">
+                                        <div class="selector_range">
+                                            <div class="min_max">
+                                                <p>12 BBY</p>
+                                                <p>112 BBY</p>
+                                            </div>
+                                            <div class="multi-range-slider">
+                                                <input v-on:input="setLeftValue('age')" type="range" id="age-input-left" min="12" max="112" v-model.number="age.min">
+                                                <input v-on:input="setRightValue('age')" type="range" id="age-input-right" min="12" max="112" v-model.number="age.max">
 
-                                            <div class="slider">
-                                                <div class="track"></div>
-                                                <div class="range"></div>
-                                                <div class="thumb left"></div>
-                                                <div class="thumb right"></div>
+                                                <div class="slider age">
+                                                    <div class="track"></div>
+                                                    <div class="range"></div>
+                                                    <div class="thumb left"></div>
+                                                    <div class="thumb right"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </transition>
                             </div>
 
                         </div>
@@ -129,23 +143,27 @@
                             <div class="selector sort">
                                 <div v-on:click="switchActive('sort')" class="selector_header">
                                     <p>Sort by <i class="fas fa-chevron-down"></i></p>
+                                    <i class="fas fa-sort-amount-down"></i>
                                 </div>
                                 <div v-if="sort.active" class="triange"></div>
-                                <div v-if="sort.active"  class="selector_body">
-                                    <div class="selector_item">
-                                        <p class="blue">age</p>
+                                <transition name="fade">
+                                    <div v-if="sort.active" v-on:click="filtBy($event.path[0]), switchActive('sort')" class="selector_body">
+                                        <div class="selector_item">
+                                            <p class="age">age</p>
+                                        </div>
+                                        <div class="selector_item">
+                                            <p class="mass">mass</p>
+                                        </div>
+                                        <div class="selector_item">
+                                            <p class="heigt">heigt</p>
+                                        </div>
                                     </div>
-                                    <div class="selector_item">
-                                        <p class="blue-gray">mass</p>
-                                    </div>
-                                    <div class="selector_item">
-                                        <p class="brown">heigt</p>
-                                    </div>
-                                </div>
+                                </transition>
+
                             </div>
                         </div>
                     </div>
-                    <div class="peoples" >
+                    <div v-on:click="switchActive()" class="peoples" >
                         <div v-for="people in peoples" class="people" v-bind:class="people.name">
                             <div class="background">
                                 <img v-bind:src="people.img" alt="">
